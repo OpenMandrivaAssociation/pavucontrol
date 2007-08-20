@@ -1,12 +1,13 @@
 %define name pavucontrol
 %define version 0.9.4
-%define release %mkrel 1
+%define release %mkrel 2
 
 Summary: Volume control for Pulseaudio sound server for Linux
 Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: %{name}-%{version}.tar.bz2
+Patch0:  %{name}-fix-move-stream-left-click.patch
 License: LGPL
 Group: Sound
 Url: http://0pointer.de/lennart/projects/pavucontrol
@@ -31,9 +32,9 @@ each playback stream separately.
 
 %prep
 %setup -q
+%patch0 -p1 -b .move-stream
 
 %build
-#export CPPFLAGS=-I%_includedir/alsa
 %configure2_5x
 %make
 
