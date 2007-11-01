@@ -13,7 +13,7 @@ Url: http://0pointer.de/lennart/projects/pavucontrol
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: gtkmm2.4-devel
 BuildRequires: libglademm2.4-devel
-BuildRequires: libpulseaudio-devel >= 0.9.5
+BuildRequires: libpulseaudio-devel >= 0.9.7
 BuildRequires: lynx
 BuildRequires: desktop-file-utils
 Requires: pulseaudio
