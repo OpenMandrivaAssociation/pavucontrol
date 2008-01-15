@@ -68,8 +68,8 @@ rm -rf %{buildroot}
 %doc README LICENSE
 %{_bindir}/%name
 %{_datadir}/applications/%name.desktop
+%{_datadir}/%name/%name.glade
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
-%{_datadir}/%name/%name.glade
 
 
