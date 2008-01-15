@@ -1,12 +1,14 @@
 %define name pavucontrol
 %define version 0.9.5
-%define release %mkrel 1
+%define release %mkrel 2
 
 Summary: Volume control for Pulseaudio sound server for Linux
 Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: %{name}-%{version}.tar.gz
+Source1: %{name}-16.png
+Source2: %{name}-32.png
 License: LGPL
 Group: Sound
 Url: http://0pointer.de/lennart/projects/pavucontrol
@@ -37,14 +39,20 @@ each playback stream separately.
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std
 
+sed -i "s/^Icon=.*/Icon=%{name}/" %{buildroot}%{_datadir}/applications/%{name}.desktop
 desktop-file-install --vendor="" \
   --add-category="GTK" \
   --add-category="X-MandrivaLinux-Multimedia-Sound" \
+  --add-category="X-MandrivaLinux-CrossDesktop" \
   --remove-category="Application" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
+  --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/%{name}.desktop
+
+# Icons
+install -D -m 0644 %SOURCE1 %{buildroot}%{_miconsdir}/%{name}.png
+install -D -m 0644 %SOURCE2 %{buildroot}%{_iconsdir}/%{name}.png
 
 %post
 %{_bindir}/update-desktop-database %{_datadir}/applications > /dev/null
@@ -53,13 +61,15 @@ desktop-file-install --vendor="" \
 if [ -x %{_bindir}/update-desktop-database ]; then %{_bindir}/update-desktop-database %{_datadir}/applications > /dev/null ; fi
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
 %doc README LICENSE
-%_bindir/%name
-%_datadir/applications/%name.desktop
-%_datadir/%name/%name.glade
+%{_bindir}/%name
+%{_datadir}/applications/%name.desktop
+%{_miconsdir}/%{name}.png
+%{_iconsdir}/%{name}.png
+%{_datadir}/%name/%name.glade
 
 
