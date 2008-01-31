@@ -1,6 +1,6 @@
 %define name pavucontrol
 %define version 0.9.5
-%define release %mkrel 3
+%define release %mkrel 4
 
 Summary: Volume control for Pulseaudio sound server for Linux
 Name: %{name}
@@ -59,7 +59,7 @@ install -D -m 0644 %SOURCE2 %{buildroot}%{_iconsdir}/%{name}.png
 %update_menus
 
 %postun
-%clean_desktop
+%clean_desktop_database
 %clean_menus
 
 %clean
