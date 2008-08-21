@@ -12,7 +12,7 @@ Source2: %{name}-32.png
 Patch0:  upstream_r71_r73.patch
 Patch1:  upstream_r74_partial.patch
 Patch2:  upstream_r75_r76.patch
-License: LGPL
+License: GPLv2+
 Group: Sound
 Url: http://0pointer.de/lennart/projects/pavucontrol
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
