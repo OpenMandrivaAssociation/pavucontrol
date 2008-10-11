@@ -29,6 +29,7 @@ BuildRequires: libglademm2.4-devel
 BuildRequires: libpulseaudio-devel >= 0.9.7
 BuildRequires: lynx
 BuildRequires: desktop-file-utils
+BuildRequires: intltool
 BuildRequires: libcanberra-devel
 Requires: pulseaudio
 Requires(post): desktop-file-utils
