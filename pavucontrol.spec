@@ -1,6 +1,6 @@
 %define name pavucontrol
-%define version 0.9.6
-%define rel 4
+%define version 0.9.7
+%define rel 1
 %define git 0
 %if %{git}
 %define release %mkrel 0.%{git}.%rel
@@ -20,16 +20,6 @@ Source0: %{name}-%{version}.tar.gz
 Source1: %{name}-16.png
 Source2: %{name}-32.png
 
-Patch1:  0001-Merge-patch-from-sjoerd-that-adds-a-new-panel-for-li.patch
-Patch2:  0002-move-the-lock-mute-buttons-to-the-same-spot-as-the-m.patch
-Patch3:  0003-Remove-the-white-header-drop-all-references-to-Puls.patch
-Patch4:  0004-Partial-commit-of-52abd202b521826eb95fd2d347a7eb5e2c.patch
-Patch5:  0005-unclutter-UI-remove-redundant-hint-bar.patch
-Patch6:  0006-switch-to-sink-page-by-default-if-no-streams-are-act.patch
-Patch7:  0007-properly-initialize-source-output-type-dropdown-sho.patch
-Patch8:  0008-move-no_xxx-labels-in-the-middle-of-the-dialogs.patch
-Patch9:  0009-Also-point-the-minimalStreamWindow-downward.patch
-Patch10: 0010-more-intelligent-initial-page-selection.patch
 License: GPLv2+
 Group: Sound
 Url: http://0pointer.de/lennart/projects/pavucontrol
@@ -59,16 +49,6 @@ each playback stream separately.
 %else
 %setup -q
 %endif
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
 
 %build
 %if %{git}
