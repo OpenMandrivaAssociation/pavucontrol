@@ -1,7 +1,7 @@
 %define name pavucontrol
-%define version 0.9.7
+%define version 0.9.8
 %define rel 1
-%define git 0
+%define git 20080204
 %if %{git}
 %define release %mkrel 0.%{git}.%rel
 %else
