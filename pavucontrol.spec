@@ -1,7 +1,7 @@
 %define name pavucontrol
 %define version 0.9.8
 %define rel 1
-%define git 20080204
+%define git 20090302
 %if %{git}
 %define release %mkrel 0.%{git}.%rel
 %else
@@ -19,6 +19,7 @@ Source0: %{name}-%{version}.tar.gz
 %endif
 Source1: %{name}-16.png
 Source2: %{name}-32.png
+Patch1: 0001-Initialise-our-dropdown-at-contruction-and-just-repo.patch
 
 License: GPLv2+
 Group: Sound
@@ -46,10 +47,11 @@ each playback stream separately.
 
 %prep
 %if %{git}
-%setup -q -n %{name}
+%setup -q -n %{name}-%{git}
 %else
 %setup -q
 %endif
+%patch1 -p1
 
 %build
 %if %{git}
