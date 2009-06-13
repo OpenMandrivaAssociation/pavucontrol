@@ -1,6 +1,6 @@
 %define name pavucontrol
 %define version 0.9.8
-%define rel 1
+%define rel 2
 %define git 0
 %if %{git}
 %define release %mkrel 0.%{git}.%rel
@@ -54,10 +54,10 @@ each playback stream separately.
 %patch1 -p1
 
 %build
-%if %{git}
+#%if %{git}
 echo "clean:" > Makefile
 ./bootstrap.sh -V
-%endif
+#%endif
 %configure2_5x
 %make
 
