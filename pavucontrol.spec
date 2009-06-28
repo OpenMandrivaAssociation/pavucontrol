@@ -1,6 +1,6 @@
 %define name pavucontrol
 %define version 0.9.8
-%define rel 5
+%define rel 6
 %define git 0
 %if %{git}
 %define release %mkrel 0.%{git}.%rel
@@ -20,6 +20,7 @@ Source0: %{name}-%{version}.tar.gz
 Source1: %{name}-16.png
 Source2: %{name}-32.png
 Patch1: pavucontrol-coling-ui-branch.patch
+Patch2: pavucontrol-coling-history-branch.patch
 
 License: GPLv2+
 Group: Sound
@@ -51,7 +52,8 @@ each playback stream separately.
 %else
 %setup -q
 %endif
-%patch1 -p1
+
+%apply_patches
 
 %build
 #%if %{git}
