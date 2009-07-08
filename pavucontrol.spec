@@ -1,12 +1,16 @@
 %define name pavucontrol
-%define version 0.9.8
-%define rel 6
+%define version 0.9.9
+%define prerel test1
 %define git 0
-%if %{git}
-%define release %mkrel 0.%{git}.%rel
-%else
-%define release %mkrel %rel
+%define rel 1
+%if %prerel
+%define rel             0.%prerel.1
 %endif
+%if %{git}
+%define rel 0.%{git}.%rel
+%endif
+
+%define release %mkrel %rel
 
 Summary: Volume control for Pulseaudio sound server for Linux
 Name: %{name}
@@ -15,11 +19,14 @@ Release: %{release}
 %if %{git}
 Source0: %{name}-%{git}.tar.lzma
 %else
+%if %prerel
+Source0: %{name}-%{version}-%prerel.tar.gz
+%else
 Source0: %{name}-%{version}.tar.gz
+%endif
 %endif
 Source1: %{name}-16.png
 Source2: %{name}-32.png
-Patch1: pavucontrol-coling-ui-branch.patch
 Patch2: pavucontrol-coling-history-branch.patch
 
 License: GPLv2+
@@ -50,7 +57,11 @@ each playback stream separately.
 %if %{git}
 %setup -q -n %{name}-%{git}
 %else
+%if %prerel
+%setup -q -n %name-%version-%prerel
+%else
 %setup -q
+%endif
 %endif
 
 %apply_patches
