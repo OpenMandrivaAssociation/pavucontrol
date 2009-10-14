@@ -1,7 +1,7 @@
 %define name pavucontrol
-%define version 0.9.9
+%define version 0.9.10
 %define git 0
-%define rel 3
+%define rel 1
 %if %{git}
 %define rel 0.%{git}.%rel
 %endif
@@ -19,8 +19,6 @@ Source0: %{name}-%{version}.tar.gz
 %endif
 Source1: %{name}-16.png
 Source2: %{name}-32.png
-Patch100: 0100-events-Hide-output-streams-with-a-stream-restore-des.patch
-Patch101: 0101-volume-Set-the-scale-properly-for-delta-changes-via-.patch
 Patch200: pavucontrol-coling-history-branch.patch
 
 License: GPLv2+
