@@ -1,7 +1,7 @@
 %define name pavucontrol
 %define version 0.9.10
 %define git 0
-%define rel 1
+%define rel 2
 %if %{git}
 %define rel 0.%{git}.%rel
 %endif
@@ -20,6 +20,7 @@ Source0: %{name}-%{version}.tar.gz
 Source1: %{name}-16.png
 Source2: %{name}-32.png
 Patch200: pavucontrol-coling-history-branch.patch
+Patch201: pavucontrol-peak-detect-survive-move.patch
 
 License: GPLv2+
 Group: Sound
