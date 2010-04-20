@@ -1,7 +1,7 @@
 %define name pavucontrol
 %define version 0.9.10
 %define git 0
-%define rel 3
+%define rel 4
 %if %{git}
 %define rel 0.%{git}.%rel
 %endif
@@ -19,8 +19,15 @@ Source0: %{name}-%{version}.tar.gz
 %endif
 Source1: %{name}-16.png
 Source2: %{name}-32.png
-Patch200: pavucontrol-coling-history-branch.patch
-Patch201: pavucontrol-peak-detect-survive-move.patch
+Patch1: pavucontrol-coling-history-branch.patch
+Patch2: pavucontrol-peak-detect-survive-move.patch
+Patch100: 0100-Split-out-the-creation-of-the-PA-context-a-little.patch
+Patch101: 0101-streamwidget-Fix-a-compile-warning.patch
+Patch102: 0102-mainwindow-Add-a-method-to-remove-all-widgets-e.g.-o.patch
+Patch103: 0103-main-Automatically-reconnect-to-PA-upon-disconnectio.patch
+Patch104: 0104-connection-Show-a-nice-label-when-connecting-to-PA.patch
+Patch105: 0105-source-outputs-Fix-a-bug-where-the-no-streams-label-.patch
+Patch106: 0106-main-Cleanup-labels-after-connection-rework.patch
 
 License: GPLv2+
 Group: Sound
