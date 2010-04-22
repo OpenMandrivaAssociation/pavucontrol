@@ -1,7 +1,7 @@
 %define name pavucontrol
 %define version 0.9.10
 %define git 0
-%define rel 4
+%define rel 5
 %if %{git}
 %define rel 0.%{git}.%rel
 %endif
@@ -28,6 +28,10 @@ Patch103: 0103-main-Automatically-reconnect-to-PA-upon-disconnectio.patch
 Patch104: 0104-connection-Show-a-nice-label-when-connecting-to-PA.patch
 Patch105: 0105-source-outputs-Fix-a-bug-where-the-no-streams-label-.patch
 Patch106: 0106-main-Cleanup-labels-after-connection-rework.patch
+Patch107: 0107-mainwindow-Compact-iterator-decls.patch
+Patch108: 0108-mainwindow-Save-restore-window-size.patch
+Patch109: 0109-mainwindow-Fix-clearing-out-of-clients.patch
+Patch110: 0110-main-Add-a-tab-command-line-argument-to-force-a-give.patch
 
 License: GPLv2+
 Group: Sound
