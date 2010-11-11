@@ -44,7 +44,7 @@ BuildRequires: libpulseaudio-devel >= 0.9.7
 BuildRequires: lynx
 BuildRequires: desktop-file-utils
 BuildRequires: intltool
-BuildRequires: libcanberra-devel
+BuildRequires: libcanberra-gtk-devel
 Requires: pulseaudio
 Requires(post): desktop-file-utils
 Requires(postun): desktop-file-utils
