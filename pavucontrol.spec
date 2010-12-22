@@ -1,7 +1,7 @@
 %define name pavucontrol
 %define version 0.9.10
 %define git 0
-%define rel 6
+%define rel 7
 %if %{git}
 %define rel 0.%{git}.%rel
 %endif
@@ -33,6 +33,7 @@ Patch108: 0108-mainwindow-Save-restore-window-size.patch
 Patch109: 0109-mainwindow-Fix-clearing-out-of-clients.patch
 Patch110: 0110-main-Add-a-tab-command-line-argument-to-force-a-give.patch
 Patch111: 0111-main-Format-string-fixes.patch
+Patch112: 0112-source-outputs-Source-outputs-do-not-support-volume-.patch
 
 License: GPLv2+
 Group: Sound
