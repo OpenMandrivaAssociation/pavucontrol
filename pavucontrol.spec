@@ -1,7 +1,7 @@
 %define name pavucontrol
-%define version 1.0
+%define version 0.9.10
 %define git 0
-%define rel 2
+%define rel 8
 %if %{git}
 %define rel 0.%{git}.%rel
 %endif
@@ -13,20 +13,35 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 %if %{git}
-Source0: %{name}-%{git}.tar.xz
+Source0: %{name}-%{git}.tar.lzma
 %else
-Source0: %{name}-%{version}.tar.xz
+Source0: %{name}-%{version}.tar.gz
 %endif
 Source1: %{name}-16.png
 Source2: %{name}-32.png
+Patch1: pavucontrol-coling-history-branch.patch
+Patch2: pavucontrol-peak-detect-survive-move.patch
+Patch100: 0100-Split-out-the-creation-of-the-PA-context-a-little.patch
+Patch101: 0101-streamwidget-Fix-a-compile-warning.patch
+Patch102: 0102-mainwindow-Add-a-method-to-remove-all-widgets-e.g.-o.patch
+Patch103: 0103-main-Automatically-reconnect-to-PA-upon-disconnectio.patch
+Patch104: 0104-connection-Show-a-nice-label-when-connecting-to-PA.patch
+Patch105: 0105-source-outputs-Fix-a-bug-where-the-no-streams-label-.patch
+Patch106: 0106-main-Cleanup-labels-after-connection-rework.patch
+Patch107: 0107-mainwindow-Compact-iterator-decls.patch
+Patch108: 0108-mainwindow-Save-restore-window-size.patch
+Patch109: 0109-mainwindow-Fix-clearing-out-of-clients.patch
+Patch110: 0110-main-Add-a-tab-command-line-argument-to-force-a-give.patch
+Patch111: 0111-main-Format-string-fixes.patch
+Patch112: 0112-source-outputs-Source-outputs-do-not-support-volume-.patch
 
 License: GPLv2+
 Group: Sound
 Url: http://0pointer.de/lennart/projects/pavucontrol
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: gtkmm3.0-devel
+BuildRequires: gtkmm2.4-devel
 BuildRequires: libglademm2.4-devel
-BuildRequires: libpulseaudio-devel >= 0.99.1
+BuildRequires: libpulseaudio-devel >= 0.9.7
 BuildRequires: lynx
 BuildRequires: desktop-file-utils
 BuildRequires: intltool
@@ -54,10 +69,10 @@ each playback stream separately.
 %apply_patches
 
 %build
-%if %{git}
+#%if %{git}
 echo "clean:" > Makefile
 ./bootstrap.sh -V
-%endif
+#%endif
 %configure2_5x
 %make
 
@@ -79,6 +94,18 @@ install -D -m 0644 %SOURCE2 %{buildroot}%{_iconsdir}/%{name}.png
 
 %find_lang %{name}
 
+%if %mdkversion < 200900
+%post
+%update_desktop_database
+%update_menus
+%endif
+
+%if %mdkversion < 200900
+%postun
+%clean_desktop_database
+%clean_menus
+%endif
+
 %clean
 rm -rf %{buildroot}
 
@@ -93,4 +120,198 @@ rm -rf %{buildroot}
 
 
 
+
+%changelog
+* Mon Feb 20 2012 abf
+- The release updated by ABF
+
+* Wed May 04 2011 Oden Eriksson <oeriksson@mandriva.com> 0.9.10-8mdv2011.0
++ Revision: 666992
+- mass rebuild
+
+* Wed Dec 22 2010 Colin Guthrie <cguthrie@mandriva.org> 0.9.10-7mdv2011.0
++ Revision: 623825
+- Fix a bug where source outputs had mute and channel lock buttons which were pointless.
+
+* Fri Dec 03 2010 Oden Eriksson <oeriksson@mandriva.com> 0.9.10-6mdv2011.0
++ Revision: 607075
+- rebuild
+
+  + John Balcaen <mikala@mandriva.org>
+    - Fix BR for libcanberra-gtk-devel
+
+* Thu Apr 22 2010 Colin Guthrie <cguthrie@mandriva.org> 0.9.10-5mdv2010.1
++ Revision: 537766
+- Fix format string stuff
+- Save/restore window size and add a --tab command line arg
+
+* Tue Apr 20 2010 Colin Guthrie <cguthrie@mandriva.org> 0.9.10-4mdv2010.1
++ Revision: 537269
+- Allow reconnections after PA server goes away.
+- Fix display bug with recording streams
+
+* Wed Mar 17 2010 Oden Eriksson <oeriksson@mandriva.com> 0.9.10-3mdv2010.1
++ Revision: 523592
+- rebuilt for 2010.1
+
+* Sat Oct 17 2009 Colin Guthrie <cguthrie@mandriva.org> 0.9.10-2mdv2010.0
++ Revision: 458029
+- Fix the peak detect code to survive a stream move.
+
+* Wed Oct 14 2009 Colin Guthrie <cguthrie@mandriva.org> 0.9.10-1mdv2010.0
++ Revision: 457466
+- New version
+
+* Sat Oct 03 2009 Colin Guthrie <cguthrie@mandriva.org> 0.9.9-3mdv2010.0
++ Revision: 452940
+- Fix some UI problems relating to showing sound event widgets/focus stealing and relative scale adjustments
+
+* Sun Sep 20 2009 Colin Guthrie <cguthrie@mandriva.org> 0.9.9-2mdv2010.0
++ Revision: 445924
+- Patch for latest PA with updated device-manager patch
+
+* Thu Sep 10 2009 Colin Guthrie <cguthrie@mandriva.org> 0.9.9-1mdv2010.0
++ Revision: 436469
+- New version: 0.9.9
+- Rebase my history branch and regenerate patch
+
+* Wed Jul 08 2009 Götz Waschk <waschk@mandriva.org> 0.9.9-0.test1.1mdv2010.0
++ Revision: 393576
+- new version
+- drop patch 1
+
+* Sun Jun 28 2009 Colin Guthrie <cguthrie@mandriva.org> 0.9.8-6mdv2010.0
++ Revision: 390223
+- Add support for module-device-manager
+
+* Sat Jun 27 2009 Colin Guthrie <cguthrie@mandriva.org> 0.9.8-5mdv2010.0
++ Revision: 390116
+- Another attack from the Lesser Spotted Package Eating Monster...
+- Add support for changing sink/source ports
+
+* Fri Jun 26 2009 Colin Guthrie <cguthrie@mandriva.org> 0.9.8-3mdv2010.0
++ Revision: 389416
+- Update the UI rework changes.
+
+* Sat Jun 13 2009 Colin Guthrie <cguthrie@mandriva.org> 0.9.8-2mdv2010.0
++ Revision: 385746
+- Update my UI patch.
+
+* Tue Apr 14 2009 Colin Guthrie <cguthrie@mandriva.org> 0.9.8-1mdv2009.1
++ Revision: 366882
+- New version 0.9.8
+- Rebase ui branch patches on current upstream
+
+* Wed Mar 25 2009 Colin Guthrie <cguthrie@mandriva.org> 0.9.8-0.20090325.1mdv2009.1
++ Revision: 361208
+- Update to my ui branch rework which is hopefully going to be merged upstream soon.
+
+* Fri Mar 06 2009 Colin Guthrie <cguthrie@mandriva.org> 0.9.8-0.20090302.2mdv2009.1
++ Revision: 349716
+- Newer snapshot + rebuild for new pulse
+
+* Mon Mar 02 2009 Colin Guthrie <cguthrie@mandriva.org> 0.9.8-0.20090302.1mdv2009.1
++ Revision: 347536
+- New snapshot including profile switching support
+
+* Wed Feb 04 2009 Colin Guthrie <cguthrie@mandriva.org> 0.9.8-0.20080204.1mdv2009.1
++ Revision: 337549
+- Update to git master to work with newer PA without crashing with some stream dbs
+
+* Sat Oct 11 2008 Colin Guthrie <cguthrie@mandriva.org> 0.9.7-1mdv2009.1
++ Revision: 292134
+- Add buildrequire for intltool
+- Add buildrequires for libcanberra
+- New version 0.9.7
+- Drop upstream patches
+
+* Fri Sep 12 2008 Colin Guthrie <cguthrie@mandriva.org> 0.9.6-4mdv2009.0
++ Revision: 284340
+- Regenerate upstream patches from git rather than legacy svn
+- Add a few more upstream cherry picks (basically all the ones that are not for PA >0.9.10)
+- Change the spec slightly in preparation for future upgrade to 0.9.7
+
+  + Götz Waschk <waschk@mandriva.org>
+    - fix license
+
+* Thu Aug 07 2008 Thierry Vignaud <tv@mandriva.org> 0.9.6-3mdv2009.0
++ Revision: 265333
+- rebuild early 2009.0 package (before pixel changes)
+
+  + Pixel <pixel@mandriva.com>
+    - rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+
+* Mon Apr 21 2008 Colin Guthrie <cguthrie@mandriva.org> 0.9.6-2mdv2009.0
++ Revision: 196338
+- Add some upstream improvements
+
+* Sat Mar 29 2008 Colin Guthrie <cguthrie@mandriva.org> 0.9.6-1mdv2008.1
++ Revision: 191088
+- New release: 0.9.7
+
+* Thu Jan 31 2008 Colin Guthrie <cguthrie@mandriva.org> 0.9.5-4mdv2008.1
++ Revision: 160893
+- Fix %%postun (#37210)
+
+* Wed Jan 16 2008 Colin Guthrie <cguthrie@mandriva.org> 0.9.5-3mdv2008.1
++ Revision: 153654
+- Fix %%post[un] macros
+
+* Tue Jan 15 2008 Colin Guthrie <cguthrie@mandriva.org> 0.9.5-2mdv2008.1
++ Revision: 151972
+- Add icons for x-desktop use (MDV#36579)
+- Add x-desktop category
+- Add BuildRequires on libpulse-devel >= 0.9.7
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Tue Oct 30 2007 Colin Guthrie <cguthrie@mandriva.org> 0.9.5-1mdv2008.1
++ Revision: 103905
+- New version
+
+* Tue Aug 21 2007 Colin Guthrie <cguthrie@mandriva.org> 0.9.4-2mdv2008.0
++ Revision: 68116
+- Fix Move Stream left mouse handling
+
+
+* Mon Feb 05 2007 Colin Guthrie <cguthrie@mandriva.org> 0.9.4-1mdv2007.0
++ Revision: 116259
+- Import pavucontrol
+
+* Mon Aug 28 2006 Götz Waschk <waschk@mandriva.org> 0.9.4-1mdv2007.0
+- bump deps
+- New release 0.9.4
+
+* Wed Aug 23 2006 Götz Waschk <waschk@mandriva.org> 0.9.3-1mdv2007.0
+- rebuild for new cairomm
+
+* Wed Jul 26 2006 Götz Waschk <waschk@mandriva.org> 0.9.3-1
+- New release 0.9.3
+
+* Tue Jul 11 2006 Götz Waschk <waschk@mandriva.org> 0.9.2-1mdv2007.0
+- update deps
+- New release 0.9.2
+
+* Sat Jun 17 2006 Götz Waschk <waschk@mandriva.org> 0.9.1-4mdv2007.0
+- fix menu
+- fix buildrequires
+
+* Fri Jun 16 2006 Götz Waschk <waschk@mandriva.org> 0.9.1-3mdv2007.0
+- fix buildrequires
+
+* Sat Jun 10 2006 Götz Waschk <waschk@mandriva.org> 0.9.1-2mdv2007.0
+- fix menu
+- fix deps
+
+* Tue Jun 06 2006 Jerome Soyer <saispo@mandriva.org> 0.9.1-1mdv2007.0
+- Fix Provides
+- Fix Menu
+- New release 0.9.1
+
+* Mon Jun 05 2006 Jerome Soyer <saispo@mandriva.org> 0.9.0-1mdv2007.0
+- Initial Package for Mandriva
 
