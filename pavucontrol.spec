@@ -1,45 +1,16 @@
-%define name pavucontrol
-%define version 0.9.10
-%define git 0
-%define rel 9
-%if %{git}
-%define rel 0.%{git}.%rel
-%endif
-
-%define release %mkrel %rel
 
 Summary:	Volume control for Pulseaudio sound server for Linux
 Name:		pavuvontrol
-Version:	0.9.10
-Release:	%{release}
-%if %{git}
-Source0:	%{name}-%{git}.tar.lzma
-%else
-Source0:	http://freedesktop.org/software/pulseaudio/pavucontrol/%{name}-%{version}.tar.gz
-%endif
+Version:	1.0
+Release:	1
+Source0:	http://freedesktop.org/software/pulseaudio/pavucontrol/%{name}-%{version}.tar.xz
 Source1:	%{name}-16.png
 Source2:	%{name}-32.png
-Patch1:		pavucontrol-coling-history-branch.patch
-Patch2:		pavucontrol-peak-detect-survive-move.patch
-Patch100:	0100-Split-out-the-creation-of-the-PA-context-a-little.patch
-Patch101:	0101-streamwidget-Fix-a-compile-warning.patch
-Patch102:	0102-mainwindow-Add-a-method-to-remove-all-widgets-e.g.-o.patch
-Patch103:	0103-main-Automatically-reconnect-to-PA-upon-disconnectio.patch
-Patch104:	0104-connection-Show-a-nice-label-when-connecting-to-PA.patch
-Patch105:	0105-source-outputs-Fix-a-bug-where-the-no-streams-label-.patch
-Patch106:	0106-main-Cleanup-labels-after-connection-rework.patch
-Patch107:	0107-mainwindow-Compact-iterator-decls.patch
-Patch108:	0108-mainwindow-Save-restore-window-size.patch
-Patch109:	0109-mainwindow-Fix-clearing-out-of-clients.patch
-Patch110:	0110-main-Add-a-tab-command-line-argument-to-force-a-give.patch
-Patch111:	0111-main-Format-string-fixes.patch
-Patch112:	0112-source-outputs-Source-outputs-do-not-support-volume-.patch
-
 License:	GPLv2+
 Group:		Sound
 Url:		http://0pointer.de/lennart/projects/pavucontrol
-BuildRequires:	gtkmm2.4-devel
-BuildRequires:	libglademm2.4-devel
+BuildRequires:	gtkmm3.0-devel
+BuildRequires:	pkgconfig(libglademm-2.4)
 BuildRequires:	pkgconfig(libpulse)
 BuildRequires:	lynx
 BuildRequires:	desktop-file-utils
@@ -59,19 +30,11 @@ you to control both the volume of hardware devices and of
 each playback stream separately.
 
 %prep
-%if %{git}
-%setup -q -n %{name}-%{git}
-%else
 %setup -q
-%endif
 
 %apply_patches
 
 %build
-#%if %{git}
-echo "clean:" > Makefile
-./bootstrap.sh -V
-#%endif
 %configure2_5x
 %make
 
@@ -79,6 +42,7 @@ echo "clean:" > Makefile
 %makeinstall_std
 
 sed -i "s/^Icon=.*/Icon=%{name}/" %{buildroot}%{_datadir}/applications/%{name}.desktop
+
 desktop-file-install --vendor="" \
   --add-category="GTK" \
   --add-category="X-MandrivaLinux-Multimedia-Sound" \
@@ -86,20 +50,14 @@ desktop-file-install --vendor="" \
   --remove-category="Application" \
   --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/%{name}.desktop
 
-# Icons
-install -D -m 0644 %SOURCE1 %{buildroot}%{_miconsdir}/%{name}.png
-install -D -m 0644 %SOURCE2 %{buildroot}%{_iconsdir}/%{name}.png
-
 %find_lang %{name}
 
 %files -f %{name}.lang
 %doc README LICENSE
-%{_bindir}/%name
-%{_datadir}/applications/%name.desktop
-%{_datadir}/%name/%name.glade
-%{_miconsdir}/%{name}.png
-%{_iconsdir}/%{name}.png
-
+%{_bindir}/%{name}
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/%{name}/%{name}.glade
+%{_iconsdir}/hicolor/*/apps/%{name}.*
 
 
 
