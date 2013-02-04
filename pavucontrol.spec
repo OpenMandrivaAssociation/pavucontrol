@@ -1,7 +1,7 @@
 %define name pavucontrol
 %define version 0.9.10
 %define git 0
-%define rel 8
+%define rel 9
 %if %{git}
 %define rel 0.%{git}.%rel
 %endif
@@ -41,7 +41,7 @@ Url: http://0pointer.de/lennart/projects/pavucontrol
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: gtkmm2.4-devel
 BuildRequires: libglademm2.4-devel
-BuildRequires: libpulseaudio-devel >= 0.9.7
+BuildRequires: pkgconfig(libpulse)
 BuildRequires: lynx
 BuildRequires: desktop-file-utils
 BuildRequires: intltool
