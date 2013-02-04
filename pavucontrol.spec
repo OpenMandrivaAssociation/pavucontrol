@@ -15,7 +15,7 @@ Release:	%{release}
 %if %{git}
 Source0:	%{name}-%{git}.tar.lzma
 %else
-Source0:	%{name}-%{version}.tar.gz
+Source0:	http://freedesktop.org/software/pulseaudio/pavucontrol/%{name}-%{version}.tar.gz
 %endif
 Source1:	%{name}-16.png
 Source2:	%{name}-32.png
