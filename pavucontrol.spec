@@ -1,6 +1,5 @@
-
 Summary:	Volume control for Pulseaudio sound server for Linux
-Name:		pavuvontrol
+Name:		pavucontrol
 Version:	1.0
 Release:	1
 Source0:	http://freedesktop.org/software/pulseaudio/pavucontrol/%{name}-%{version}.tar.xz
@@ -16,11 +15,11 @@ BuildRequires:	lynx
 BuildRequires:	desktop-file-utils
 BuildRequires:	intltool
 BuildRequires:	libcanberra-gtk-devel
-Requires:		pulseaudio
+Requires:	pulseaudio
 Requires(post):	desktop-file-utils
-Requires(postun):	desktop-file-utils
+Requires(postun):desktop-file-utils
 
-Provides:		pulseaudio-volume-control
+Provides:	pulseaudio-volume-control
 
 %description
 Pulseaudio Volume Control (pavucontrol) is a simple 
@@ -58,8 +57,6 @@ desktop-file-install --vendor="" \
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/%{name}/%{name}.glade
 %{_iconsdir}/hicolor/*/apps/%{name}.*
-
-
 
 %changelog
 * Mon Feb 20 2012 abf
