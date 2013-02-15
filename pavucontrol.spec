@@ -48,6 +48,10 @@ desktop-file-install --vendor="" \
   --add-category="X-MandrivaLinux-CrossDesktop" \
   --remove-category="Application" \
   --dir %{buildroot}%{_datadir}/applications %{buildroot}%{_datadir}/applications/%{name}.desktop
+  
+#icons install
+install -D -m 0644 %SOURCE1 %{buildroot}%{_miconsdir}/%{name}.png
+install -D -m 0644 %SOURCE2 %{buildroot}%{_iconsdir}/%{name}.png
 
 %find_lang %{name}
 
@@ -56,7 +60,8 @@ desktop-file-install --vendor="" \
 %{_bindir}/%{name}
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/%{name}/%{name}.glade
-%{_iconsdir}/hicolor/*/apps/%{name}.*
+%{_miconsdir}/%{name}.png
+%{_iconsdir}/%{name}.png
 
 %changelog
 * Mon Feb 20 2012 abf
