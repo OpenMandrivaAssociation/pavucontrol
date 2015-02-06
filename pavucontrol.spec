@@ -1,13 +1,17 @@
 Summary:	Volume control for Pulseaudio sound server for Linux
 Name:		pavucontrol
 Version:	2.0
-Release:	8
+Release:	9
 License:	GPLv2+
 Group:		Sound
 Url:		http://0pointer.de/lennart/projects/pavucontrol
 Source0:	http://freedesktop.org/software/pulseaudio/pavucontrol/%{name}-%{version}.tar.xz
 Source1:	%{name}-16.png
 Source2:	%{name}-32.png
+Patch0:		0001-sinkwidget-add-support-for-AAC-pass-through.patch
+Patch1:		0002-pavucontrol-ellipsize-labels-to-fix-window-resizing.patch
+Patch2:		0003-Add-horizontal-scrollbars-automatically.patch
+Patch3:		0004-Reference-the-widget-before-returning-it-from-create.patch
 BuildRequires:	desktop-file-utils
 BuildRequires:	intltool
 BuildRequires:	lynx
@@ -31,7 +35,7 @@ each playback stream separately.
 %apply_patches
 
 %build
-%configure2_5x
+%configure
 %make
 
 %install
