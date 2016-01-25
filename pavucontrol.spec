@@ -16,7 +16,7 @@ Patch4:		0004-i18n-Some-fixes-for-the-Italian-translation.patch
 Patch5:		0005-i18n-improve-one-Italian-string.patch
 Patch6:		0006-Remove-Encoding-key-from-.desktop-file.patch
 Patch7:		0007-build-sys-Use-C-11-for-building.patch
-BuildRequires:	autoconf-archives
+BuildRequires:	autoconf-archive
 BuildRequires:	desktop-file-utils
 BuildRequires:	intltool
 BuildRequires:	lynx
