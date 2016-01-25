@@ -1,0 +1,27 @@
+From d271f628d808708fcf2415c87ebdc2e699856831 Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <git@arunraghavan.net>
+Date: Fri, 10 Apr 2015 18:24:08 +0530
+Subject: [PATCH 2/7] build-sys: Depend on libpulse >= 5.0
+
+This is required for pa_card_profile_info2 (where we just started
+querying profile availability).
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index 5b50e2d..e34e975 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -68,7 +68,7 @@ if test -d ../pulseaudio ; then
+    PULSE_LIBS='-L$(top_srcdir)/../pulseaudio/src/.libs -lpulse -lpulse-mainloop-glib'
+    echo "*** Found pulseaudio in ../pulseaudio, using that version ***"
+ else
+-   PKG_CHECK_MODULES(PULSE, [ libpulse >= 0.9.16 libpulse-mainloop-glib >= 0.9.16 ])
++   PKG_CHECK_MODULES(PULSE, [ libpulse >= 5.0 libpulse-mainloop-glib >= 0.9.16 ])
+ fi
+ 
+ AC_SUBST(PULSE_LIBS)
+-- 
+1.9.5
+

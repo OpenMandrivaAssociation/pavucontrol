@@ -1,0 +1,28 @@
+From 9b307dcfe2051caea7145c8ab48953bb4f57005c Mon Sep 17 00:00:00 2001
+From: Antonio Ospite <ao2@ao2.it>
+Date: Fri, 8 Jan 2016 10:13:15 +0100
+Subject: [PATCH 5/7] i18n: improve one Italian string
+
+The previous translation may sound like "Lock up the channels", better
+to add the "together" (insieme) in there like in the English version
+which gives more the idea of aggregation.
+---
+ po/it.po | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/po/it.po b/po/it.po
+index 48b8b22..d524cc0 100644
+--- a/po/it.po
++++ b/po/it.po
+@@ -136,7 +136,7 @@ msgstr "_Ingressi"
+ # (ndt) suggerimento
+ #: ../src/pavucontrol.glade.h:28
+ msgid "Lock channels together"
+-msgstr "Blocca i canali"
++msgstr "Blocca insieme i canali"
+ 
+ # (ndt) suggerimento
+ #: ../src/pavucontrol.glade.h:29
+-- 
+1.9.5
+

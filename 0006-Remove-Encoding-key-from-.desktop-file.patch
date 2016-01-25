@@ -1,0 +1,24 @@
+From 4db50bc09a10d307d9de57ba0531b9b26bfc3c21 Mon Sep 17 00:00:00 2001
+From: Pino Toscano <toscano.pino@tiscali.it>
+Date: Sun, 24 Jan 2016 13:57:03 +0100
+Subject: [PATCH 6/7] Remove Encoding key from .desktop file
+
+Long time deprecated.
+---
+ src/pavucontrol.desktop.in | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/pavucontrol.desktop.in b/src/pavucontrol.desktop.in
+index bad82b3..79145ee 100644
+--- a/src/pavucontrol.desktop.in
++++ b/src/pavucontrol.desktop.in
+@@ -1,6 +1,5 @@
+ [Desktop Entry]
+ Version=1.0
+-Encoding=UTF-8
+ _Name=PulseAudio Volume Control
+ _GenericName=Volume Control
+ _Comment=Adjust the volume level
+-- 
+1.9.5
+

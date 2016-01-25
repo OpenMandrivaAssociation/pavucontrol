@@ -8,6 +8,14 @@ Url:		http://0pointer.de/lennart/projects/pavucontrol
 Source0:	http://freedesktop.org/software/pulseaudio/pavucontrol/%{name}-%{version}.tar.xz
 Source1:	%{name}-16.png
 Source2:	%{name}-32.png
+Patch0:		0000-i18n-Updated-Polish-translation.patch
+Patch1:		0001-mainwindow-unavailable-profiles-are-marked-as-such-i.patch
+Patch2:		0002-build-sys-Depend-on-libpulse-5.0.patch
+Patch3:		0003-Add-version-command-line-option.patch
+Patch4:		0004-i18n-Some-fixes-for-the-Italian-translation.patch
+Patch5:		0005-i18n-improve-one-Italian-string.patch
+Patch6:		0006-Remove-Encoding-key-from-.desktop-file.patch
+Patch7:		0007-build-sys-Use-C-11-for-building.patch
 BuildRequires:	desktop-file-utils
 BuildRequires:	intltool
 BuildRequires:	lynx
@@ -31,6 +39,8 @@ each playback stream separately.
 %apply_patches
 
 %build
+autoreconf -fiv
+
 %configure
 %make
 

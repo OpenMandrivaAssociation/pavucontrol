@@ -1,0 +1,43 @@
+From 290485e8abe02a9c78d10441ffe7c3dcb4a2987a Mon Sep 17 00:00:00 2001
+From: Peter Meerwald <pmeerw@pmeerw.net>
+Date: Wed, 20 May 2015 23:07:55 +0200
+Subject: [PATCH 3/7] Add --version command line option
+
+allow pavucontrol to display its --version
+see https://bugs.freedesktop.org/show_bug.cgi?id=83147
+
+Signed-off-by: Peter Meerwald <pmeerw@pmeerw.net>
+---
+ src/pavucontrol.cc | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/src/pavucontrol.cc b/src/pavucontrol.cc
+index c1019b6..7a95c3e 100644
+--- a/src/pavucontrol.cc
++++ b/src/pavucontrol.cc
+@@ -671,11 +671,22 @@ int main(int argc, char *argv[]) {
+     entry3.set_description(_("Maximize the window."));
+     group.add_entry(entry3, maximize);
+ 
++    bool version = false;
++    Glib::OptionEntry entry4;
++    entry4.set_long_name("version");
++    entry4.set_description(_("Show version"));
++    group.add_entry(entry4, version);
++
+     options.set_main_group(group);
+ 
+     try {
+         Gtk::Main kit(argc, argv, options);
+ 
++        if (version) {
++            printf("%s\n", PACKAGE_STRING);
++            return 0;
++        }
++
+         ca_context_set_driver(ca_gtk_context_get(), "pulse");
+ 
+         MainWindow* mainWindow = MainWindow::create(maximize);
+-- 
+1.9.5
+
