@@ -1,7 +1,7 @@
 Summary:	Volume control for Pulseaudio sound server for Linux
 Name:		pavucontrol
 Version:	3.0
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		Sound
 Url:		http://0pointer.de/lennart/projects/pavucontrol
@@ -49,11 +49,11 @@ autoreconf -fiv
 %makeinstall_std
 
 sed -i "s/^Icon=.*/Icon=%{name}/" %{buildroot}%{_datadir}/applications/%{name}.desktop
+sed -i "s@^Exec=.*@Exec=%{_bindir}/%{name}-gtk@" %{buildroot}%{_datadir}/applications/%{name}.desktop
 
 desktop-file-install --vendor="" \
 	--add-category="GTK" \
 	--add-category="X-MandrivaLinux-Multimedia-Sound" \
-	--add-category="X-MandrivaLinux-CrossDesktop" \
 	--remove-category="Application" \
 	--dir %{buildroot}%{_datadir}/applications \
 	%{buildroot}%{_datadir}/applications/%{name}.desktop
@@ -62,13 +62,15 @@ desktop-file-install --vendor="" \
 install -D -m 0644 %SOURCE1 %{buildroot}%{_miconsdir}/%{name}.png
 install -D -m 0644 %SOURCE2 %{buildroot}%{_iconsdir}/%{name}.png
 
+# rename so pavucontrol-qt can take over
+mv %{buildroot}%{_bindir}/%{name} %{buildroot}%{_bindir}/%{name}-gtk
+
 %find_lang %{name}
 
 %files -f %{name}.lang
 %doc README LICENSE
-%{_bindir}/%{name}
+%{_bindir}/%{name}-gtk
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/%{name}/%{name}.glade
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
-
