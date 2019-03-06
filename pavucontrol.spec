@@ -1,21 +1,13 @@
 Summary:	Volume control for Pulseaudio sound server for Linux
 Name:		pavucontrol
-Version:	3.0
-Release:	5
+Version:	4.0
+Release:	1
 License:	GPLv2+
 Group:		Sound
 Url:		http://0pointer.de/lennart/projects/pavucontrol
 Source0:	http://freedesktop.org/software/pulseaudio/pavucontrol/%{name}-%{version}.tar.xz
 Source1:	%{name}-16.png
 Source2:	%{name}-32.png
-Patch0:		0000-i18n-Updated-Polish-translation.patch
-Patch1:		0001-mainwindow-unavailable-profiles-are-marked-as-such-i.patch
-Patch2:		0002-build-sys-Depend-on-libpulse-5.0.patch
-Patch3:		0003-Add-version-command-line-option.patch
-Patch4:		0004-i18n-Some-fixes-for-the-Italian-translation.patch
-Patch5:		0005-i18n-improve-one-Italian-string.patch
-Patch6:		0006-Remove-Encoding-key-from-.desktop-file.patch
-Patch7:		0007-build-sys-Use-C-11-for-building.patch
 BuildRequires:	autoconf-archive
 BuildRequires:	desktop-file-utils
 BuildRequires:	intltool
@@ -36,17 +28,16 @@ you to control both the volume of hardware devices and of
 each playback stream separately.
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 
 %build
 autoreconf -fiv
 
 %configure
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 sed -i "s/^Icon=.*/Icon=%{name}/" %{buildroot}%{_datadir}/applications/%{name}.desktop
 sed -i "s@^Exec=.*@Exec=%{_bindir}/%{name}-gtk@" %{buildroot}%{_datadir}/applications/%{name}.desktop
