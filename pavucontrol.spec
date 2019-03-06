@@ -55,6 +55,7 @@ install -D -m 0644 %SOURCE2 %{buildroot}%{_iconsdir}/%{name}.png
 
 # rename so pavucontrol-qt can take over
 mv %{buildroot}%{_bindir}/%{name} %{buildroot}%{_bindir}/%{name}-gtk
+rm -rf %{_docdir}/%{name}
 
 %find_lang %{name}
 
