@@ -16,6 +16,7 @@ BuildRequires:	pkgconfig(gtkmm-3.0)
 BuildRequires:	pkgconfig(libcanberra-gtk)
 BuildRequires:	pkgconfig(libglademm-2.4)
 BuildRequires:	pkgconfig(libpulse)
+BuildRequires:	pkgconfig(json-glib-1.0)
 Requires:	pulseaudio
 Requires(post,postun):	desktop-file-utils
 Provides:	pulseaudio-volume-control
