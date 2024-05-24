@@ -38,8 +38,8 @@ each playback stream separately.
 %install
 %meson_install
 
-sed -i "s/^Icon=.*/Icon=%{name}/" %{buildroot}%{_datadir}/applications/org.pulseaudio.pavucontrol.desktop
-sed -i "s@^Exec=.*@Exec=%{_bindir}/%{name}-gtk@" %{buildroot}%{_datadir}/applications/org.pulseaudio.pavucontrol.desktop
+#sed -i "s/^Icon=.*/Icon=%{name}/" %{buildroot}%{_datadir}/applications/org.pulseaudio.pavucontrol.desktop
+#sed -i "s@^Exec=.*@Exec=%{_bindir}/%{name}-gtk@" %{buildroot}%{_datadir}/applications/org.pulseaudio.pavucontrol.desktop
 
 desktop-file-install --vendor="" \
 	--add-category="GTK" \
