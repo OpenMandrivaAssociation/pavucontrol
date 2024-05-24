@@ -46,8 +46,7 @@ desktop-file-install --vendor="" \
 	--add-category="X-MandrivaLinux-Multimedia-Sound" \
 	--remove-category="Application" \
 	--dir %{buildroot}%{_datadir}/applications \
-	%{buildroot}%{_datadir}/applications/%{name}.desktop
-  
+	%{buildroot}%{_datadir}/applications/org.pulseaudio.pavucontrol.desktop
 #icons install
 install -D -m 0644 %SOURCE1 %{buildroot}%{_miconsdir}/%{name}.png
 install -D -m 0644 %SOURCE2 %{buildroot}%{_iconsdir}/%{name}.png
