@@ -58,10 +58,10 @@ rm -rf %{buildroot}%{_docdir}/%{name}
 %find_lang %{name}
 
 %files -f %{name}.lang
-%doc README LICENSE
+%doc LICENSE
 %{_bindir}/%{name}-gtk
 %{_datadir}/applications/org.pulseaudio.pavucontrol.desktop
-%{_datadir}/%{name}/%{name}.glade
+#_datadir}/%{name}/%{name}.glade
 %{_metainfodir}/org.pulseaudio.pavucontrol.metainfo.xml
 %{_miconsdir}/%{name}.png
 %{_iconsdir}/%{name}.png
