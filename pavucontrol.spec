@@ -1,6 +1,6 @@
 Summary:	Volume control for Pulseaudio sound server for Linux
 Name:		pavucontrol
-Version:	6.0
+Version:	6.1
 Release:	1
 License:	GPLv2+
 Group:		Sound
