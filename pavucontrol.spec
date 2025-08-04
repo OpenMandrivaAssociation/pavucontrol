@@ -24,8 +24,6 @@ Requires(post,postun):	desktop-file-utils
 Provides:	pulseaudio-volume-control
 
 %patchlist
-https://gitlab.freedesktop.org/pulseaudio/pavucontrol/-/commit/72055b484a8a7e94a0d75afd7ed6154fefee2c76.patch
-https://gitlab.freedesktop.org/pulseaudio/pavucontrol/-/commit/c46fbee81c28d38f7ce650bacb865429a0fdf739.patch
 
 %description
 Pulseaudio Volume Control (pavucontrol) is a simple 
