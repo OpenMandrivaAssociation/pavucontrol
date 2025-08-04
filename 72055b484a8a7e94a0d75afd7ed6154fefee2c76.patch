@@ -1,0 +1,48 @@
+From 72055b484a8a7e94a0d75afd7ed6154fefee2c76 Mon Sep 17 00:00:00 2001
+From: rohit haldipur <rohithaldipur@gmail.com>
+Date: Wed, 7 Aug 2024 23:26:30 +0530
+Subject: [PATCH] Simplified logic for hiding unavailable/unplugged card
+ profiles
+
+---
+ src/mainwindow.cc | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/src/mainwindow.cc b/src/mainwindow.cc
+index f227b34..8a3f2f3 100644
+--- a/src/mainwindow.cc
++++ b/src/mainwindow.cc
+@@ -410,7 +410,7 @@ void MainWindow::updateCard(const pa_card_info &info) {
+ 
+     w->profiles.clear();
+     for (std::set<pa_card_profile_info2>::iterator profileIt = profile_priorities.begin(); profileIt != profile_priorities.end(); ++profileIt) {
+-        bool hasNo = false, hasOther = false;
++        bool hasNo = false, hasOther = false, available = true;
+         std::map<Glib::ustring, PortInfo>::iterator portIt;
+         Glib::ustring desc = profileIt->description;
+ 
+@@ -427,14 +427,18 @@ void MainWindow::updateCard(const pa_card_info &info) {
+                 break;
+             }
+         }
+-        if (hasNo && !hasOther)
++        if (hasNo && !hasOther) {
+             desc += _(" (unplugged)");
++            available = false;
++        }
+ 
+-        if (!profileIt->available)
++        if (!profileIt->available) {
+             desc += _(" (unavailable)");
++            available = false;
++        }
+ 
+         w->profiles.push_back(std::pair<Glib::ustring, Glib::ustring>(profileIt->name, desc));
+-        w->availableProfiles[profileIt->name] = hasOther && profileIt->available;
++        w->availableProfiles[profileIt->name] = available;
+     }
+ 
+     w->activeProfile = info.active_profile ? info.active_profile->name : "";
+-- 
+GitLab
+
