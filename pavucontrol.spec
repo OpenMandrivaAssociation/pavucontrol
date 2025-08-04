@@ -34,7 +34,6 @@ each playback stream separately.
 
 %files -f %{name}.lang
 %doc LICENSE
-%doc %{_datadir}/doc/pavucontrol/
 %{_bindir}/%{name}
 %{_datadir}/applications/org.pulseaudio.pavucontrol.desktop
 %{_metainfodir}/org.pulseaudio.pavucontrol.metainfo.xml
@@ -52,5 +51,7 @@ desktop-file-install --vendor="" \
 #icons install
 install -D -m 0644 %SOURCE1 %{buildroot}%{_miconsdir}/%{name}.png
 install -D -m 0644 %SOURCE2 %{buildroot}%{_iconsdir}/%{name}.png
+
+rm -rf %{buildroot}%{_docdir}/%{name}
 
 %find_lang %{name}
