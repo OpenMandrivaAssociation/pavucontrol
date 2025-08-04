@@ -34,6 +34,7 @@ each playback stream separately.
 
 %files -f %{name}.lang
 %doc LICENSE
+%doc %{_datadir}/doc/pavucontrol/
 %{_bindir}/%{name}
 %{_datadir}/applications/org.pulseaudio.pavucontrol.desktop
 %{_metainfodir}/org.pulseaudio.pavucontrol.metainfo.xml
